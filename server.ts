@@ -2,7 +2,7 @@
  * @file Implements an Express Node HTTP server.
  */
 import express, {Request, Response} from 'express';
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
@@ -30,6 +30,7 @@ const tuitController= TuitController.getInstance(app);
 const username= process.env.USERNAME;
 const password=process.env.PASSWORD;
 
+// @ts-ignore
 mongoose.connect('mongodb+srv://tanejai:ishita1995@cluster0.yhvrg8t.mongodb.net/myFirstDB?retryWrites=true&w=majority', options,(error => {
     if(!error){
         console.log("DB connected");
