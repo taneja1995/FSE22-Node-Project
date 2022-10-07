@@ -5,3 +5,4 @@ data
 out
 coverage
 .env
+package-lock.json
