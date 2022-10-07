@@ -12,6 +12,8 @@ app.use(bodyParser.json())
 app.use(cors());
 app.use(express.json());
 
+require('dotenv').config();
+
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -23,7 +25,12 @@ const options = {
 }
 
 const userController= UserController.getInstance(app);
-mongoose.connect('mongodb://localhost:27017/Tuiter', options,(error => {
+const tuitController= TuitController.getInstance(app);
+
+const username= process.env.USERNAME;
+const password=process.env.PASSWORD;
+
+mongoose.connect('mongodb+srv://tanejai:ishita1995@cluster0.yhvrg8t.mongodb.net/myFirstDB?retryWrites=true&w=majority', options,(error => {
     if(!error){
         console.log("DB connected");
     }else{
@@ -31,6 +38,17 @@ mongoose.connect('mongodb://localhost:27017/Tuiter', options,(error => {
     }
 }));
 
+/*
+mongoose.connect('mongodb://localhost:27017/Tuiter', options,(error => {
+    if(!error){
+        console.log("DB connected");
+    }else{
+        console.log("DB not connected")
+    }
+}));
+*/
+
+// to test if server is running on local port.
 app.get('/hello', (req, res) =>
     res.send('Hello World!'));
 
