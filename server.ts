@@ -53,6 +53,10 @@ mongoose.connect('mongodb://localhost:27017/Tuiter', options,(error => {
 app.get('/hello', (req, res) =>
     res.send('Hello World!'));
 
+app.get('/',(req,res) => res.send(
+    'Welcome to FSE Node project'
+));
+
 /**
  * Start a server listening at port 4000 locally
  * but use environment variable PORT on Heroku if available.
