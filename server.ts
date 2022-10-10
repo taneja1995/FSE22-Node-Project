@@ -27,11 +27,8 @@ const options = {
 const userController= UserController.getInstance(app);
 const tuitController= TuitController.getInstance(app);
 
-const username= process.env.USERNAME;
-const password=process.env.PASSWORD;
-
 // @ts-ignore
-mongoose.connect('mongodb+srv://tanejai:ishita1995@cluster0.yhvrg8t.mongodb.net/myFirstDB?retryWrites=true&w=majority', options,(error => {
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.yhvrg8t.mongodb.net/myFirstDB?retryWrites=true&w=majority`, options,(error => {
     if(!error){
         console.log("DB connected");
     }else{
