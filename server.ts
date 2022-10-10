@@ -28,7 +28,7 @@ const userController= UserController.getInstance(app);
 const tuitController= TuitController.getInstance(app);
 
 // @ts-ignore
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.yhvrg8t.mongodb.net/myFirstDB?retryWrites=true&w=majority`, options,(error => {
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.yhvrg8t.mongodb.net/myFirstDB?retryWrites=true&w=majority` || 'mongodb://localhost:27017/Tuiter', options,(error => {
     if(!error){
         console.log("DB connected");
     }else{
