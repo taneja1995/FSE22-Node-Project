@@ -6,6 +6,10 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
+import LikeController from "./controllers/LikeController";
+import FollowController from "./controllers/FollowController";
+import BookmarkController from "./controllers/BookmarkController";
+import MessageController from "./controllers/MessageController";
 const cors = require('cors')
 const app = express();
 app.use(bodyParser.json())
@@ -26,6 +30,10 @@ const options = {
 
 const userController= UserController.getInstance(app);
 const tuitController= TuitController.getInstance(app);
+const likeController= LikeController.getInstance(app);
+const followController= FollowController.getInstance(app);
+const bookmarkController=BookmarkController.getInstance(app);
+const messageController= MessageController.getInstance(app);
 
 // @ts-ignore
 mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.yhvrg8t.mongodb.net/myFirstDB?retryWrites=true&w=majority` || 'mongodb://localhost:27017/Tuiter', options,(error => {

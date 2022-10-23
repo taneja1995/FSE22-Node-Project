@@ -6,6 +6,7 @@
     "outDir": "./build",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "lib": ["es6"]
   }
 }

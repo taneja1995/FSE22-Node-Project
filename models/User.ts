@@ -2,6 +2,10 @@ import AccountType from "./AccountType";
 import MaritalStatus from "./MaritalStatus";
 import Location from "./Location";
 
+/**
+ *
+ *
+ */
 export default class User {
     private username: string = '';
     private password: string = '';
