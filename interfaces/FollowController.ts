@@ -1,5 +1,8 @@
 import {Request, Response} from "express";
 
+/**
+ * @file Declares API request/response methods for Follow Controller.
+ */
 export default interface FollowController{
 
     userFollowsAnotherUser (req: Request, res: Response): void;

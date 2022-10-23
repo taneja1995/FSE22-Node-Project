@@ -1,7 +1,16 @@
+/**
+ * @file Implements DAO managing data storage of bookmarks. Uses mongoose BookmarkModel
+ * to integrate with MongoDB
+ */
 import BookmarkDaoI from "../interfaces/BookmarkDao";
 import Bookmark from "../models/Bookmark";
 import BookmarkModel from "../mongoose/BookmarkModel";
 
+/**
+ * @class BookmarkDao Implements Data Access Object managing data storage
+ * of Bookmark
+ * @property {BookmarkDao} bookmarkDao Private single instance of BookmarkDao
+ */
 export default class BookmarkDao implements BookmarkDaoI {
 
     private static bookmarkDao: BookmarkDao | null = null;

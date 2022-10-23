@@ -1,5 +1,8 @@
 import Follow from "../models/Follow";
 
+/**
+ * @file Declares API for Follows related data access object methods
+ */
 export default interface FollowDao{
 
     userFollowsAnotherUser(uid1: string, uid2:string):Promise<Follow>;

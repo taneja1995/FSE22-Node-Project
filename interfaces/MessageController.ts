@@ -1,5 +1,8 @@
 import {Request, Response} from "express";
 
+/**
+ * @file Declares API request/response methods for Message Controller.
+ */
 export default interface MessageController{
 
     userMessageUser (req: Request, res: Response): void;

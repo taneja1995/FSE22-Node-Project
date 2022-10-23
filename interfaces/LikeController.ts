@@ -1,5 +1,8 @@
 import {Request, Response} from "express";
 
+/**
+ * @file Declares API request/response methods for Like Controller.
+ */
 export default interface LikeController{
 
     userLikesTuit (req: Request, res: Response): void;

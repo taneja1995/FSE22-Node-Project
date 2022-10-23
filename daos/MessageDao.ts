@@ -1,7 +1,16 @@
+/**
+ * @file Implements DAO managing data storage of messages. Uses mongoose MessageModel
+ * to integrate with MongoDB
+ */
 import MessageDaoI from "../interfaces/MessageDao";
 import Message from "../models/Message";
 import MessageModel from "../mongoose/MessageModel";
 
+/**
+ * @class MessageDao Implements Data Access Object managing data storage
+ * of messages
+ * @property {MessageDao} messageDao Private single instance of MessageDao
+ */
 export default class MessageDao implements MessageDaoI {
 
     private static messageDao: MessageDao | null = null;

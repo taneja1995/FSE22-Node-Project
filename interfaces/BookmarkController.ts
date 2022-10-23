@@ -1,5 +1,8 @@
 import {Request, Response} from "express";
 
+/**
+ * @file Declares API request/response methods for Bookmark Controller.
+ */
 export default interface BookmarkController{
 
     userBookmarksTuit (req: Request, res: Response): void;

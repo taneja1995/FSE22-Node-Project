@@ -1,5 +1,25 @@
+/**
+ * @file Implements mongoose schema for users
+ */
 import mongoose from "mongoose";
 import User from "../models/User";
+
+/**
+ * @typedef User represents an active user in the Tuiter app.
+ * @property {string} username
+ * @property {string} password
+ * @property {string} firstName
+ * @property {string} lastName
+ * @property {string} email
+ * @property {string} profilePhoto
+ * @property {string} headerImage
+ * @property {string} accountType
+ * @property {string} maritalStatus
+ * @property {string} biography
+ * @property {Date} dateOfBirth
+ * @property {Date} joined
+ * @property {Number} location
+ */
 const UserSchema = new mongoose.Schema<User>({
     username: {type: String, required: true},
     password: {type: String, required: true},
