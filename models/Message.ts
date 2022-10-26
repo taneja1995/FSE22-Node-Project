@@ -1,8 +1,6 @@
 /**
  * @file Message data model
  */
-import User from "./User";
-
 /**
  * @typedef Message represents the message sent from one user to other user.
  * @property {string} message
@@ -12,8 +10,8 @@ import User from "./User";
  */
 export default interface Message{
 
-    message: String,
-    to: User,
-    from: User,
+    message: string,
+    to: string,
+    from: string,
     sentOn: Date
 };

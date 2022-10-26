@@ -22,6 +22,8 @@ import Location from "./Location";
  * @property {Date} joined when the user joined on tuiter.
  * @property {Number} location user's location
  */
+
+
 export default class User {
     private username: string = '';
     private password: string = '';
