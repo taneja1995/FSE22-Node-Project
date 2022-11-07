@@ -72,4 +72,7 @@ export default class UserDao implements UserDaoI {
         // @ts-ignore
         return await UserModel.updateOne({_id: uid}, {$set: user});
     }
+
+    deleteUsersByUsername = async (username: string): Promise<any> =>
+        UserModel.deleteMany({username});
 }
