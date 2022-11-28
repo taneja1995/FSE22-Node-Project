@@ -22,13 +22,33 @@ import LikeController from "./controllers/LikeController";
 import FollowController from "./controllers/FollowController";
 import BookmarkController from "./controllers/BookmarkController";
 import MessageController from "./controllers/MessageController";
-const cors = require('cors')
+import AuthenticationController from "./controllers/AuthenticationController";
+const cors = require('cors');
 const app = express();
-app.use(bodyParser.json())
-app.use(cors());
-app.use(express.json());
-
+const session = require("express-session");
 require('dotenv').config();
+app.use(bodyParser.json())
+app.use(express.json());
+app.use(cors({
+credentials:true,
+    origin:'http://localhost:3000',
+}));
+console.log("inside the server");
+let sess = {
+    resave:true,
+    secret: 'mysecret',
+    saveUninitialized: false,
+    cookie: {
+        secure: false
+    }
+}
+
+if (process.env.ENV === 'PRODUCTION') {
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
+}
+
+app.use(session(sess));
 
 const options = {
     useNewUrlParser: true,
@@ -46,6 +66,7 @@ const likeController= LikeController.getInstance(app);
 const followController= FollowController.getInstance(app);
 const bookmarkController=BookmarkController.getInstance(app);
 const messageController= MessageController.getInstance(app);
+const authController=AuthenticationController.getInstance(app);
 
 // @ts-ignore
 mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.yhvrg8t.mongodb.net/myFirstDB?retryWrites=true&w=majority` || 'mongodb://localhost:27017/Tuiter', options,(error => {
