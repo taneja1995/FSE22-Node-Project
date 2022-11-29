@@ -13,6 +13,9 @@ export default  class AuthenticationController {
         if (AuthenticationController.authController == null) {
             AuthenticationController.authController = new AuthenticationController();
             app.post("/api/auth/signup", AuthenticationController.authController.signup);
+            app.post("/api/auth/profile", AuthenticationController.authController.profile);
+            app.post("/api/auth/logout", AuthenticationController.authController.logout);
+            app.post("/api/auth/login", AuthenticationController.authController.login);
         }
         return AuthenticationController.authController;
     }
@@ -39,6 +42,50 @@ export default  class AuthenticationController {
             res.json(insertedUser);
         }
     }
+
+    profile = (req:Request, res:Response) => {
+        // @ts-ignore
+        const profile =  req.session['profile'];
+        if (profile) {
+            profile.password = "";
+            res.json(profile);
+        } else {
+            res.sendStatus(403);
+        }
+
+    }
+    logout = (req:Request, res:Response) => {
+        // @ts-ignore
+        req.session.destroy();
+        res.sendStatus(200);
+    }
+
+    login = async (req:Request, res:Response) => {
+        console.log("inside the login method")
+        const user = req.body;
+        const username = user.username;
+        const password = user.password;
+        const existingUser =  await AuthenticationController.userDao.findUserByUsername(username);
+
+        if (!existingUser) {
+            console.log("didnt find user");
+            res.sendStatus(403);
+            return;
+        }
+        const match = await bcrypt
+            .compare(password, existingUser.password);
+         console.log("the match is"+match);
+        if (match) {
+            existingUser.password = '*****';
+            // @ts-ignore
+            req.session['profile'] = existingUser;
+            res.json(existingUser);
+        } else {
+            res.sendStatus(403);
+        }
+    };
+
+
 
 }
 
