@@ -28,7 +28,7 @@ class TuitDao {
         this.findTuitsByUser = (uid) => __awaiter(this, void 0, void 0, function* () {
             return TuitModel_1.default
                 .find({ postedBy: uid })
-                .populate('postedBy', 'username');
+                .populate('postedBy', 'username').exec();
         });
     }
     /**
@@ -79,6 +79,11 @@ class TuitDao {
         return __awaiter(this, void 0, void 0, function* () {
             // @ts-ignore
             return yield TuitModel_1.default.updateOne({ _id: tid }, { $set: tuit });
+        });
+    }
+    updateLikes(tid, newStats) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return TuitModel_1.default.updateOne({ _id: tid }, { $set: { stats: newStats } });
         });
     }
 }

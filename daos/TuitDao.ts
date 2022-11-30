@@ -84,4 +84,9 @@ export default class TuitDao implements TuitDaoI {
         return await TuitModel.updateOne({_id:tid}, {$set: tuit})
     }
 
+    async updateLikes (tid:string, newStats:any) :Promise<any> {
+        return TuitModel.updateOne(
+            {_id: tid},
+            {$set: {stats: newStats}})
+    }
 }
