@@ -39,6 +39,7 @@ let sess = {
     secret: 'mysecret',
     saveUninitialized: false,
     cookie: {
+        sameSite: 'lax',
         secure: false
     }
 }

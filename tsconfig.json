@@ -2,11 +2,19 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "rootDir": "./",
-    "outDir": "./build",
-    "skipLibCheck": true,
+    "outDir": "dist",
     "esModuleInterop": true,
-    "strict": true,
-    "lib": ["es6"]
-  }
+    "sourceMap": true,
+  },
+  "moduleResolution":"node",
+  "files": [
+    "server.ts",
+    "./node_modules/@types/mocha/index.d.ts",
+  ],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

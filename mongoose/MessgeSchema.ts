@@ -12,7 +12,7 @@ import Message from "../models/Message";
  * @property {ObjectId} from user from whom message is sent.
  * @property {Date} sentOn represents the date when message is sent/received.
  */
-const MessageSchema = new mongoose.Schema<Message, any, any>({
+const MessageSchema = new mongoose.Schema<Message>({
     message: {type: String, required: true},
     to: {type: String, required:true},
     from: {type: String, required: true},

@@ -10,7 +10,7 @@ import Follow from "../models/Follow";
 * @property {ObjectId} userFollowed user followed by another user.
 * @property {ObjectId} userFollowing  user following the another user.
 */
-const FollowSchema = new mongoose.Schema<Follow, any, any>({
+const FollowSchema = new mongoose.Schema<Follow>({
     userFollowed: {type: Schema.Types.ObjectId, ref: "UserModel"},
     userFollowing: {type: Schema.Types.ObjectId, ref: "UserModel"},
 }, {collection: "follows"});

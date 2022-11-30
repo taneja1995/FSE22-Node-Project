@@ -5,6 +5,8 @@
 import Tuit from "../models/Tuit";
 import TuitDaoI from "../interfaces/TuitDao";
 import TuitModel from "../mongoose/TuitModel";
+import Follow from "../models/Follow";
+import FollowModel from "../mongoose/FollowModel";
 
 /**
  * @class TuitDao Implements Data Access Object managing data storage
@@ -32,8 +34,8 @@ export default class TuitDao implements TuitDaoI {
      * @param tuit
      * @returns {Promise} of type Tuit.
      */
-    async createTuit(tuit: Tuit): Promise<Tuit> {
-        return await TuitModel.create(tuit);
+    async createTuit(uid:string, tuit: Tuit): Promise<Tuit> {
+        return await TuitModel.create({...tuit,postedBy:uid});
     }
 
     /**
@@ -67,12 +69,12 @@ export default class TuitDao implements TuitDaoI {
      * @param uid user id that needs to be retrieved.
      * @returns {Promise} of array type Tuit.
      */
-    async findTuitsByUser(uid: string): Promise<Tuit[]> {
-        return await TuitModel.find();
-    }
+     findTuitsByUser= async (uid: string): Promise<any> =>
+       TuitModel
+            .find({postedBy: uid})
+            .populate('postedBy','username').exec();
 
     /**
-     * Updates the tuit from the tuit collection.
      * @param tid the tuit that needs to be updated
      * @param tuit the tuit body with updated content
      * @returns {Promise} of type any.

@@ -50,7 +50,8 @@ export default class UserDao implements UserDaoI {
      * @returns {Promise} of type User.
      */
     async createUser(user: User): Promise<User> {
-        return await UserModel.create(user);
+        // @ts-ignore
+        return UserModel.create(user);
     }
 
     /**

@@ -9,7 +9,7 @@ import Bookmark from "../models/Bookmark";
  * @property {ObjectId} bookmarkedBy User who bookmarks the tuit
  * @property {ObjectId} tuit  tuit that gets bookmarked.
  */
-const BookmarkSchema = new mongoose.Schema<Bookmark, any, any>({
+const BookmarkSchema = new mongoose.Schema<Bookmark>({
     tuit: {type: Schema.Types.ObjectId, ref: "TuitModel"},
     bookmarkedBy: {type: Schema.Types.ObjectId, ref: "UserModel"},
 }, {collection: "bookmarks"});

@@ -38,9 +38,10 @@ export default  class TuitController implements TuitControllerI {
              */
             app.get("/api/tuits",TuitController.tuitController.findAllTuits);
             app.get("/api/tuits/:tuitid",TuitController.tuitController.findTuitById);
-            app.post("/api/tuits",TuitController.tuitController.createTuit);
+            app.post("/api/users/:uid/tuits",TuitController.tuitController.createTuit);
             app.delete("/api/tuits/:tuitid",TuitController.tuitController.deleteTuit);
             app.put("/api/tuits/:tuitid",TuitController.tuitController.updateTuit);
+            app.get("/api/users/:uid/tuits", TuitController.tuitController.findTuitsByUser);
         }
         return TuitController.tuitController;
     }
@@ -54,10 +55,14 @@ export default  class TuitController implements TuitControllerI {
      * body formatted as JSON containing the new tuit that was inserted in the
      * database
      */
-    createTuit = (req:Request, res:Response) =>
-       TuitController.tuitDao.createTuit(req.body)
-           .then((tuit:Tuit) => res.json(tuit));
-
+    createTuit = (req:Request, res:Response) => {
+        let userId = req.params.uid === "me"
+        && req.session['profile'] ?
+            req.session['profile']._id :
+            req.params.uid;
+        TuitController.tuitDao.createTuit(userId,req.body)
+            .then((tuit: Tuit) => res.json(tuit));
+    }
     /**
      * @param {Request} req Represents request from client, including path
      * parameter tid identifying the primary key of the tuit to be removed
@@ -94,10 +99,13 @@ export default  class TuitController implements TuitControllerI {
      * @param {Response} res Represents response to client, including the
      * body formatted as JSON containing the tuit objects.
      */
-    findTuitsByUser=(req:Request, res:Response) =>
-        TuitController.tuitDao.findTuitsByUser(req.params.userid)
-            .then((tuits:Tuit[]) => res.json(tuits));
-
+    findTuitsByUser=(req:Request, res:Response) => {
+        let userId = req.params.uid === "me"
+        && req.session['profile'] ?
+            req.session['profile']._id : req.params.uid;
+        TuitController.tuitDao.findTuitsByUser(userId)
+            .then((tuits: Tuit[]) => res.json(tuits));
+    }
     /**
      * @param {Request} req Represents request from client, including path
      * parameter tid identifying the primary key of the tuit to be modified

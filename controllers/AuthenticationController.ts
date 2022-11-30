@@ -37,26 +37,26 @@ export default  class AuthenticationController {
             const insertedUser = await AuthenticationController.userDao
                 .createUser(newUser);
             insertedUser.password = '';
-            // @ts-ignore
             req.session['profile'] = insertedUser;
             res.json(insertedUser);
         }
     }
 
     profile = (req:Request, res:Response) => {
-        // @ts-ignore
+        console.log("the req is"+req.body.key);
         const profile =  req.session['profile'];
+        console.log(profile);
         if (profile) {
             profile.password = "";
             res.json(profile);
         } else {
+            console.log("403 error caught in profile");
             res.sendStatus(403);
         }
 
     }
     logout = (req:Request, res:Response) => {
-        // @ts-ignore
-        req.session.destroy();
+        //req.session.destroy();
         res.sendStatus(200);
     }
 
@@ -77,8 +77,8 @@ export default  class AuthenticationController {
          console.log("the match is"+match);
         if (match) {
             existingUser.password = '*****';
-            // @ts-ignore
             req.session['profile'] = existingUser;
+            console.log("the session profile is"+req.session['profile']);
             res.json(existingUser);
         } else {
             res.sendStatus(403);
