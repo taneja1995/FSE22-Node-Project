@@ -47,7 +47,7 @@ class UserController {
          * database
          */
         this.createUser = (req, res) => UserController.userDao.createUser(req.body)
-            .then((user) => res.json(user));
+            .then(user => res.json(user));
         /**
          * Removes a user instance from the database
          * @param {Request} req Represents request from client, including path
@@ -89,6 +89,7 @@ UserController.getInstance = (app) => {
         app.post("/api/users", UserController.userController.createUser);
         app.delete("/api/users/:userid", UserController.userController.deleteUser);
         app.put("/api/users/:userid", UserController.userController.updateUser);
+        app.get("/api/users/username/:username", UserController.userController.findUserByUsername);
         app.delete("/api/users/username/:username/delete", UserController.userController.deleteUsersByUsername);
     }
     return UserController.userController;

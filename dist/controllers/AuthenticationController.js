@@ -13,65 +13,62 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const UserDao_1 = __importDefault(require("../daos/UserDao"));
-const bcrypt = require('bcrypt');
+// @ts-ignore
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const saltRounds = 10;
 class AuthenticationController {
     constructor() {
         this.signup = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            console.log("inside the signup method----node ");
             const newUser = req.body;
             const password = newUser.password;
-            const hash = yield bcrypt.hash(password, saltRounds);
+            const hash = yield bcrypt_1.default.hash(password, saltRounds);
             newUser.password = hash;
             const existingUser = yield AuthenticationController.userDao
-                .findUserByUsername(req.body.username);
+                .findUserByUsername(newUser.username);
             if (existingUser) {
                 res.sendStatus(403);
-                return;
             }
             else {
                 const insertedUser = yield AuthenticationController.userDao
                     .createUser(newUser);
                 insertedUser.password = '';
+                // @ts-ignore
                 req.session['profile'] = insertedUser;
                 res.json(insertedUser);
             }
         });
         this.profile = (req, res) => {
-            console.log("the req is" + req.body.key);
+            // @ts-ignore
             const profile = req.session['profile'];
-            console.log(profile);
             if (profile) {
-                profile.password = "";
+                profile.password = '';
                 res.json(profile);
             }
             else {
-                console.log("403 error caught in profile");
                 res.sendStatus(403);
             }
         };
         this.logout = (req, res) => {
-            //req.session.destroy();
+            // @ts-ignore
+            req.session.destroy((err) => { });
             res.sendStatus(200);
         };
         this.login = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            console.log("inside the login method");
             const user = req.body;
             const username = user.username;
             const password = user.password;
-            const existingUser = yield AuthenticationController.userDao.findUserByUsername(username);
+            const existingUser = yield AuthenticationController.userDao
+                .findUserByUsername(username);
             if (!existingUser) {
-                console.log("didnt find user");
                 res.sendStatus(403);
                 return;
             }
-            const match = yield bcrypt
+            const match = yield bcrypt_1.default
                 .compare(password, existingUser.password);
-            console.log("the match is" + match);
             if (match) {
-                existingUser.password = '*****';
+                existingUser.password = '******';
+                // @ts-ignore
                 req.session['profile'] = existingUser;
-                console.log("the session profile is" + req.session['profile']);
                 res.json(existingUser);
             }
             else {
@@ -86,10 +83,10 @@ AuthenticationController.authController = null;
 AuthenticationController.getInstance = (app) => {
     if (AuthenticationController.authController == null) {
         AuthenticationController.authController = new AuthenticationController();
-        app.post("/api/auth/signup", AuthenticationController.authController.signup);
-        app.post("/api/auth/profile", AuthenticationController.authController.profile);
-        app.post("/api/auth/logout", AuthenticationController.authController.logout);
-        app.post("/api/auth/login", AuthenticationController.authController.login);
+        app.post('/api/auth/signup', AuthenticationController.authController.signup);
+        app.post('/api/auth/profile', AuthenticationController.authController.profile);
+        app.post('/api/auth/logout', AuthenticationController.authController.logout);
+        app.post('/api/auth/login', AuthenticationController.authController.login);
     }
     return AuthenticationController.authController;
 };

@@ -61,7 +61,7 @@ export default  class TuitController implements TuitControllerI {
             req.session['profile']._id :
             req.params.uid;
         TuitController.tuitDao.createTuit(userId,req.body)
-            .then((tuit: Tuit) => res.json(tuit));
+            .then((tuit) => res.json(tuit));
     }
     /**
      * @param {Request} req Represents request from client, including path
@@ -104,7 +104,7 @@ export default  class TuitController implements TuitControllerI {
         && req.session['profile'] ?
             req.session['profile']._id : req.params.uid;
         TuitController.tuitDao.findTuitsByUser(userId)
-            .then((tuits: Tuit[]) => res.json(tuits));
+            .then((tuits) => res.json(tuits));
     }
     /**
      * @param {Request} req Represents request from client, including path
