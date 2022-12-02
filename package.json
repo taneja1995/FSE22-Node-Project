@@ -7,9 +7,6 @@
     "start": "node dist/server.js",
     "build": "tsc && npm run start"
   },
-  "engines": {
-    "node": "14.15.4"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {

@@ -21,7 +21,7 @@ const UserModel_1 = __importDefault(require("../mongoose/UserModel"));
 class UserDao {
     constructor() {
         this.deleteUsersByUsername = (username) => __awaiter(this, void 0, void 0, function* () { return UserModel_1.default.deleteMany({ username }); });
-        this.findUserByUsername = (username) => __awaiter(this, void 0, void 0, function* () { return UserModel_1.default.findOne({ username: username }); });
+        this.findUserByUsername = (username) => __awaiter(this, void 0, void 0, function* () { return yield UserModel_1.default.findOne({ username: username }); });
     }
     /**
      * Retrieves all the users from the users collection.
@@ -49,7 +49,6 @@ class UserDao {
      */
     createUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            // @ts-ignore
             return UserModel_1.default.create(user);
         });
     }

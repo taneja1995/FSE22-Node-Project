@@ -40,6 +40,7 @@ export default class UserController implements UserControllerI {
             app.post("/api/users",UserController.userController.createUser);
             app.delete("/api/users/:userid",UserController.userController.deleteUser);
             app.put("/api/users/:userid",UserController.userController.updateUser);
+            app.get("/api/users/username/:username",UserController.userController.findUserByUsername);
             app.delete("/api/users/username/:username/delete", UserController.userController.deleteUsersByUsername);
         }
         return UserController.userController;
@@ -78,7 +79,7 @@ export default class UserController implements UserControllerI {
      */
     createUser = (req: Request, res: Response) =>
         UserController.userDao.createUser(req.body)
-            .then((user:User)=> res.json(user));
+            .then(user=> res.json(user));
 
     /**
      * Removes a user instance from the database

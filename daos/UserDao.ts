@@ -49,8 +49,7 @@ export default class UserDao implements UserDaoI {
      * @param user
      * @returns {Promise} of type User.
      */
-    async createUser(user: User): Promise<User> {
-        // @ts-ignore
+    async createUser(user: User): Promise<any> {
         return UserModel.create(user);
     }
 
@@ -78,5 +77,5 @@ export default class UserDao implements UserDaoI {
         UserModel.deleteMany({username});
 
     findUserByUsername = async (username: string): Promise<any> =>
-        UserModel.findOne({username:username});
+        await UserModel.findOne({username:username});
 }
