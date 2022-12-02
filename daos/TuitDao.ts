@@ -70,7 +70,7 @@ export default class TuitDao implements TuitDaoI {
      * @returns {Promise} of array type Tuit.
      */
      findTuitsByUser= async (uid: string): Promise<any> =>
-       TuitModel
+       await TuitModel
             .find({postedBy: uid})
             .populate('postedBy','username').exec();
 

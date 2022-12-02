@@ -15,7 +15,7 @@ const TuitSchema = new mongoose.Schema<Tuit>({
 
     tuit: {type: String, required: true},
     postedOn: {type: Date, default: Date.now},
-    postedBy: {type: Schema.Types.ObjectId, ref:"UserModel"},
+    postedBy: {type: mongoose.Schema.Types.ObjectId, ref:"UserModel"},
     stats: {
         replies: {type: Number, default: 0},
         retuits: {type: Number, default: 0},
