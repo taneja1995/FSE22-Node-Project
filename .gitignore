@@ -2,6 +2,7 @@
 node_modules
 build
 data
+dist
 out
 coverage
 .env
