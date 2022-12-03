@@ -71,7 +71,7 @@ export default class LikeDao implements LikeDaoI{
         LikeModel.deleteOne({likedBy: uid, tuit: tid});
 
     findUserLikesTuit= async(uid:string, tid:string):Promise<Like>=>
-        LikeModel.findOne({tuit:tid, likedBy:uid});
+        await LikeModel.findOne({tuit:tid, likedBy:uid});
 
 
     countHowManyLikedTuit= async(tid:string):Promise<any> =>
