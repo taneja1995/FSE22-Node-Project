@@ -4,6 +4,7 @@
  */
 import mongoose from "mongoose";
 import LikeSchema from "./LikeSchema";
+import Like from "../models/Like";
 
-const LikeModel= mongoose.model("LikeModel", LikeSchema);
+const LikeModel= mongoose.model<Like>("LikeModel", LikeSchema);
 export  default LikeModel;
