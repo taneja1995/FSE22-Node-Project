@@ -121,7 +121,13 @@ export default class LikeController implements LikeControllerI{
         (req.params.uid, req.params.tid)
             .then(status => res.send(status));
 
-
+    /**
+     * @param {Request} req Represents request from client, including the
+     * path parameters uid and tid representing the user that is liking
+     * the tuit and the tuit being liked and gets toggled.
+     * @param {Response} res Represents response to client, including status
+     * on whether liking the tuit was successful or not
+     */
     userTogglesTuitLikes =  async (req:Request, res:Response) => {
         const uid = req.params.uid;
         const tid = req.params.tid;
