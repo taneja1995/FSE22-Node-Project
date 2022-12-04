@@ -7,6 +7,7 @@ import TuitDaoI from "../interfaces/TuitDao";
 import TuitModel from "../mongoose/TuitModel";
 import Follow from "../models/Follow";
 import FollowModel from "../mongoose/FollowModel";
+import Stats from "../models/Stats";
 
 /**
  * @class TuitDao Implements Data Access Object managing data storage
@@ -84,7 +85,7 @@ export default class TuitDao implements TuitDaoI {
         return await TuitModel.updateOne({_id:tid}, {$set: tuit})
     }
 
-    async updateLikes (tid:string, newStats:any) :Promise<any> {
+    async updateStats (tid:string, newStats:Stats) :Promise<any> {
         return TuitModel.updateOne(
             {_id: tid},
             {$set: {stats: newStats}})

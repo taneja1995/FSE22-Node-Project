@@ -1,8 +1,8 @@
 /**
  * @file Declares Tuit data type
  */
-import User from "./User";
 import mongoose from "mongoose";
+import Stats from "./Stats";
 
 /**
  * @typedef Tuit Represents a post made by the user.
@@ -15,5 +15,7 @@ export default class Tuit {
      private postedOn: Date = new Date();
      private postedBy:  {type: mongoose.Schema.Types.ObjectId,
     ref: 'UserModel',
-    required: true}
+    required: true
+     }
+    stats:Stats
 }
