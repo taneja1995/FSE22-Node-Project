@@ -1,1 +1,1 @@
-{"version":3,"file":"Tuit.js","sourceRoot":"","sources":["../../models/Tuit.ts"],"names":[],"mappings":";;AAMA;;;;;GAKG;AACH,MAAqB,IAAI;IAAzB;QACa,SAAI,GAAW,EAAE,CAAC;QAClB,aAAQ,GAAS,IAAI,IAAI,EAAE,CAAC;IAIzC,CAAC;CAAA;AAND,uBAMC"}
+{"version":3,"file":"Tuit.js","sourceRoot":"","sources":["../../models/Tuit.ts"],"names":[],"mappings":";;AAMA;;;;;GAKG;AACH,MAAqB,IAAI;IAAzB;QACa,SAAI,GAAW,EAAE,CAAC;QAClB,aAAQ,GAAS,IAAI,IAAI,EAAE,CAAC;IAMzC,CAAC;CAAA;AARD,uBAQC"}

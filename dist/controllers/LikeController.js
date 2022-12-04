@@ -74,7 +74,7 @@ class LikeController {
             const userId = uid === "me" && profile ?
                 profile._id : uid;
             try {
-                const userAlreadyLikedTuit = LikeController.likeDao.findUserLikesTuit(userId, tid);
+                const userAlreadyLikedTuit = yield LikeController.likeDao.findUserLikesTuit(userId, tid);
                 const howManyLikedTuit = yield LikeController.likeDao.countHowManyLikedTuit(tid);
                 let tuit = yield LikeController.tuitDao.findTuitById(tid);
                 if (userAlreadyLikedTuit) {
@@ -86,7 +86,7 @@ class LikeController {
                     tuit.stats.likes = howManyLikedTuit + 1;
                 }
                 ;
-                yield LikeController.tuitDao.updateLikes(tid, tuit.stats);
+                yield LikeController.tuitDao.updateStats(tid, tuit.stats);
                 res.sendStatus(200);
             }
             catch (e) {
@@ -99,6 +99,7 @@ exports.default = LikeController;
 LikeController.likeDao = LikeDao_1.default.getInstance();
 LikeController.likeController = null;
 LikeController.tuitDao = TuitDao_1.default.getInstance();
+//private static dislikeDao: DislikeDao = DislikeDao.getInstance();
 /**
  * Creates singleton controller instance
  * @param {Express} app Express instance to declare the RESTful Web service

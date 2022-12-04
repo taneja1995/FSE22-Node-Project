@@ -26,7 +26,7 @@ class TuitDao {
          * @returns {Promise} of array type Tuit.
          */
         this.findTuitsByUser = (uid) => __awaiter(this, void 0, void 0, function* () {
-            return TuitModel_1.default
+            return yield TuitModel_1.default
                 .find({ postedBy: uid })
                 .populate('postedBy', 'username').exec();
         });
@@ -81,7 +81,7 @@ class TuitDao {
             return yield TuitModel_1.default.updateOne({ _id: tid }, { $set: tuit });
         });
     }
-    updateLikes(tid, newStats) {
+    updateStats(tid, newStats) {
         return __awaiter(this, void 0, void 0, function* () {
             return TuitModel_1.default.updateOne({ _id: tid }, { $set: { stats: newStats } });
         });

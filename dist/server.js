@@ -29,6 +29,7 @@ const FollowController_1 = __importDefault(require("./controllers/FollowControll
 const BookmarkController_1 = __importDefault(require("./controllers/BookmarkController"));
 const MessageController_1 = __importDefault(require("./controllers/MessageController"));
 const AuthenticationController_1 = __importDefault(require("./controllers/AuthenticationController"));
+const DislikeController_1 = __importDefault(require("./controllers/DislikeController"));
 const app = (0, express_1.default)();
 let sess = {
     secret: "mysecret",
@@ -66,6 +67,7 @@ const followController = FollowController_1.default.getInstance(app);
 const bookmarkController = BookmarkController_1.default.getInstance(app);
 const messageController = MessageController_1.default.getInstance(app);
 const authController = AuthenticationController_1.default.getInstance(app);
+const dislikeController = DislikeController_1.default.getInstance(app);
 // to test if server is running on local port.
 app.get('/hello', (req, res) => res.send('Hello World!'));
 app.get('/', (req, res) => res.send('Welcome to FSE Node Project'));

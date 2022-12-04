@@ -26,6 +26,7 @@ import FollowController from "./controllers/FollowController";
 import BookmarkController from "./controllers/BookmarkController";
 import MessageController from "./controllers/MessageController";
 import AuthenticationController from "./controllers/AuthenticationController";
+import DislikeController from "./controllers/DislikeController";
 
 const app = express();
 
@@ -70,6 +71,7 @@ const followController = FollowController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
 const messageController = MessageController.getInstance(app);
 const authController = AuthenticationController.getInstance(app);
+const dislikeController= DislikeController.getInstance(app);
 
 // to test if server is running on local port.
 app.get('/hello', (req: Request, res:Response) =>
