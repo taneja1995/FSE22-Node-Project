@@ -27,7 +27,7 @@ export default class LikeController implements LikeControllerI{
     private static likeDao: LikeDao = LikeDao.getInstance();
     private static likeController: LikeController | null = null;
     private static tuitDao:TuitDao = TuitDao.getInstance();
-    //private static dislikeDao: DislikeDao = DislikeDao.getInstance();
+    private static dislikeDao: DislikeDao = DislikeDao.getInstance();
 
     /**
      * Creates singleton controller instance
@@ -144,7 +144,12 @@ export default class LikeController implements LikeControllerI{
             } else {
                 await LikeController.likeDao.userLikesTuit(userId, tid);
                 tuit.stats.likes = howManyLikedTuit + 1;
+                // if user has disliked the tuit before
+                if(tuit.stats.dislikes==1){
+                          tuit.stats.dislikes=tuit.stats.dislikes-1;
+                }
             };
+            console.log("the tuit stats are"+tuit.stats);
             await LikeController.tuitDao.updateStats(tid, tuit.stats);
             res.sendStatus(200);
         } catch (e) {

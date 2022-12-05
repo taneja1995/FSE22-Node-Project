@@ -17,6 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const LikeDao_1 = __importDefault(require("../daos/LikeDao"));
 const TuitDao_1 = __importDefault(require("../daos/TuitDao"));
+const DislikeDao_1 = __importDefault(require("../daos/DislikeDao"));
 /**
  * @class LikeController Implements RESTful Web service API for like resource.
  * <ul>
@@ -82,6 +83,13 @@ class LikeController {
          */
         this.userUnlikesTuit = (req, res) => LikeController.likeDao.userUnlikesTuit(req.params.uid, req.params.tid)
             .then(status => res.send(status));
+        /**
+         * @param {Request} req Represents request from client, including the
+         * path parameters uid and tid representing the user that is liking
+         * the tuit and the tuit being liked and gets toggled.
+         * @param {Response} res Represents response to client, including status
+         * on whether liking the tuit was successful or not
+         */
         this.userTogglesTuitLikes = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const uid = req.params.uid;
             const tid = req.params.tid;
@@ -99,8 +107,13 @@ class LikeController {
                 else {
                     yield LikeController.likeDao.userLikesTuit(userId, tid);
                     tuit.stats.likes = howManyLikedTuit + 1;
+                    // if user has disliked the tuit before
+                    if (tuit.stats.dislikes == 1) {
+                        tuit.stats.dislikes = tuit.stats.dislikes - 1;
+                    }
                 }
                 ;
+                console.log("the tuit stats are" + tuit.stats);
                 yield LikeController.tuitDao.updateStats(tid, tuit.stats);
                 res.sendStatus(200);
             }
@@ -114,7 +127,7 @@ exports.default = LikeController;
 LikeController.likeDao = LikeDao_1.default.getInstance();
 LikeController.likeController = null;
 LikeController.tuitDao = TuitDao_1.default.getInstance();
-//private static dislikeDao: DislikeDao = DislikeDao.getInstance();
+LikeController.dislikeDao = DislikeDao_1.default.getInstance();
 /**
  * Creates singleton controller instance
  * @param {Express} app Express instance to declare the RESTful Web service

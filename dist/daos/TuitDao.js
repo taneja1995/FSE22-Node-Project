@@ -81,6 +81,11 @@ class TuitDao {
             return yield TuitModel_1.default.updateOne({ _id: tid }, { $set: tuit });
         });
     }
+    /**
+     * @param tid the tuit that needs to be updated
+     * @param newStats with the count of likes or dislikes
+     * @returns {Promise} of type any.
+     */
     updateStats(tid, newStats) {
         return __awaiter(this, void 0, void 0, function* () {
             return TuitModel_1.default.updateOne({ _id: tid }, { $set: { stats: newStats } });

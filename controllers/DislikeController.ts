@@ -120,6 +120,10 @@ export default class DislikeController implements DislikeControllerI{
             } else {
                 await DislikeController.dislikeDao.userDislikesTuit(userId, tid);
                 tuit.stats.dislikes = howManyDislikedTuit + 1;
+                // if user has liked the tuit before
+                if(tuit.stats.likes==1) {
+                    tuit.stats.likes = tuit.stats.likes - 1;
+                }
             };
             await DislikeController.tuitDao.updateStats(tid, tuit.stats);
             res.sendStatus(200);

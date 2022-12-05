@@ -56,7 +56,16 @@ class LikeDao {
          * @param tid tuit that gets unliked.
          */
         this.userUnlikesTuit = (uid, tid) => __awaiter(this, void 0, void 0, function* () { return LikeModel_1.default.deleteOne({ likedBy: uid, tuit: tid }); });
+        /**
+         * Fetches the like collection for a user that likes a tuit.
+         * @param uid user that likes.
+         * @param tid tuit that gets liked.
+         */
         this.findUserLikesTuit = (uid, tid) => __awaiter(this, void 0, void 0, function* () { return yield LikeModel_1.default.findOne({ tuit: tid, likedBy: uid }); });
+        /**
+         * Fetches the count of how many times tuit gets liked..
+         * @param tid tuit that gets liked.
+         */
         this.countHowManyLikedTuit = (tid) => __awaiter(this, void 0, void 0, function* () { return LikeModel_1.default.count({ tuit: tid }); });
     }
 }
