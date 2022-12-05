@@ -8,7 +8,7 @@ export default interface DislikeDao{
     findAllUsersThatDislikedTuit (tid: string): Promise<Dislike[]>;
     findAllTuitsDislikedByUser (uid: string): Promise<Dislike[]>;
     userUnDislikesTuit (tid: string, uid: string): Promise<any>;
-    userDislikesTuit (tid: string, uid: string): Promise<Dislike>;
+    userDislikesTuit (uid: string, tid: string): Promise<Dislike>;
     findUserDislikesTuit(uid:string, tid:string):Promise<Dislike>;
     countHowManyDislikedTuit(tid:string):Promise<any>;
 

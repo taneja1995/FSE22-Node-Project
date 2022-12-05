@@ -32,24 +32,11 @@ class LikeDao {
                 .exec();
         });
         /**
-         * Retrieves all the tuits that are liked by a user.
-         * @param uid user that likes all the tuit.
-         * @returns {Promise} of array Like type.
-         */
-        this.findAllTuitsLikedByUser = (uid) => __awaiter(this, void 0, void 0, function* () {
-            return LikeModel_1.default
-                .find({ likedBy: uid })
-                .populate({ path: "tuit", populate: {
-                    path: "postedBy"
-                }
-            }).exec();
-        });
-        /**
          * Creates a like collection when a user likes a tuit.
          * @param tid tuit that's being liked.
          * @param uid user that likes the tuit.
          */
-        this.userLikesTuit = (tid, uid) => __awaiter(this, void 0, void 0, function* () { return LikeModel_1.default.create({ tuit: tid, likedBy: uid }); });
+        this.userLikesTuit = (uid, tid) => __awaiter(this, void 0, void 0, function* () { return LikeModel_1.default.create({ tuit: tid, likedBy: uid }); });
         /**
          * Deletes the like collection when a user unlikes a tuit.
          * @param uid user that unlikes.
@@ -67,6 +54,21 @@ class LikeDao {
          * @param tid tuit that gets liked.
          */
         this.countHowManyLikedTuit = (tid) => __awaiter(this, void 0, void 0, function* () { return LikeModel_1.default.count({ tuit: tid }); });
+    }
+    /**
+     * Retrieves all the tuits that are liked by a user.
+     * @param uid user that likes all the tuit.
+     * @returns {Promise} of array Like type.
+     */
+    findAllTuitsLikedByUser(uid) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield LikeModel_1.default
+                .find({ likedBy: uid })
+                .populate({ path: "tuit", populate: {
+                    path: "postedBy"
+                }
+            }).exec();
+        });
     }
 }
 exports.default = LikeDao;

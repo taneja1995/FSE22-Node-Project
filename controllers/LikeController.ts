@@ -71,7 +71,7 @@ export default class LikeController implements LikeControllerI{
         const userId = uid === "me" && profile ?
             profile._id : uid;
 
-        await LikeController.likeDao.findAllTuitsLikedByUser(userId).then(likes =>{
+        await LikeController.likeDao.findAllTuitsLikedByUser(userId).then( likes =>{
             console.log("yhe user id is",userId);
             console.log("the likes are", likes);
             const likesNonNullTuits =

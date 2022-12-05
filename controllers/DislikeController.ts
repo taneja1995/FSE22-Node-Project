@@ -55,9 +55,9 @@ export default class DislikeController implements DislikeControllerI{
         (userId).then(dislikes => {
             const likesNonNullTuits =
                 dislikes.filter(dislike => dislike.tuit);
-            const tuitsFromLikes =
+            const tuitsFromDislikes =
                 likesNonNullTuits.map(dislike => dislike.tuit);
-            res.json(tuitsFromLikes);
+            res.json(tuitsFromDislikes);
             res.json(dislikes)});
     }
     /**
